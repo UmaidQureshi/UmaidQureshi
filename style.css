@@ -1,4 +1,4 @@
-    
+
 :root {
   --ast-post-nav-space: 0;
   --ast-container-default-xlg-padding: 3em;
@@ -3769,5 +3769,10 @@ a:where(:not(.wp-element-button)) {
   --wpforms-button-size-padding-h: 15px;
   --wpforms-button-size-margin-top: 10px;
 
+}
 
+/* Custom CSS */
+.wp-block-uagb-container.uagb-block-4c3875af,
+.wp-block-uagb-container.uagb-block-bfd12293 {
+  background-image: url('./assests/home.png') !important;
 }
