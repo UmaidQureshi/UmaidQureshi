@@ -3776,3 +3776,15 @@ a:where(:not(.wp-element-button)) {
 .wp-block-uagb-container.uagb-block-bfd12293 {
   background-image: url('./assests/home.png') !important;
 }
+.wpforms-field-large {
+  background-color: #fff !important;
+}
+.custom-input {
+  margin-right: 10px;
+  padding: 10px;
+  width: 1rem;
+  height: 1rem;
+}
+.custom-input:checked {
+  background-color: #007cfb !important;
+}
