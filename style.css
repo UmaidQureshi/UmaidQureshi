@@ -3788,3 +3788,27 @@ a:where(:not(.wp-element-button)) {
 .custom-input:checked {
   background-color: #007cfb !important;
 }
+input {
+  color: black !important;
+}
+input::selection {
+  color: black !important;
+}
+input::-webkit-selection {
+  color: black !important;
+}
+input::-moz-selection {
+  color: black !important;
+}
+input::-ms-selection {
+  color: black !important;
+}
+input::-webkit-selection {
+  color: black !important;
+}
+input::-moz-selection {
+  color: black !important;
+}
+input::-ms-selection {
+  color: black !important;
+}
