@@ -146,11 +146,44 @@ flexibility(document.documentElement);
 	<script type="module"
 		src="https://skystreamnow.com/wp-content/plugins/presto-player/dist/components/web-components/web-components.esm.js?ver=1713778228"></script>
 	<script src="https://skystreamnow.com/wp-includes/js/wp-emoji-release.min.js?ver=6.5.6" defer=""></script>
+	
+	<style>
+		/* Toaster Notification Styles */
+		.toaster {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: #4CAF50;
+			color: white;
+			padding: 15px 20px;
+			border-radius: 5px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			z-index: 10000;
+			transform: translateX(400px);
+			transition: transform 0.3s ease-in-out;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			max-width: 300px;
+		}
+
+		.toaster.show {
+			transform: translateX(0);
+		}
+
+		.toaster.success {
+			background: #4CAF50;
+		}
+	</style>
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope"
 	class="page-template-default page page-id-20 ast-desktop ast-plain-container ast-no-sidebar astra-4.6.12 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled"
 	style="">
+
+	<!-- Toaster Notification -->
+	<div id="toaster" class="toaster success" style="display: none;">
+		Your request has been send successfully
+	</div>
 
 	<a class="skip-link screen-reader-text" href="#content" role="link" title="Skip to content">
 		Skip to content</a>
@@ -786,6 +819,50 @@ flexibility(document.documentElement);
 		/* ]]> */
 	</script>
 
+	<script>
+		// Toaster notification functionality
+		function showToaster() {
+			const toaster = document.getElementById('toaster');
+			toaster.style.display = 'block';
+			toaster.classList.add('show');
+			
+			// Hide toaster after 3 seconds
+			setTimeout(() => {
+				toaster.classList.remove('show');
+				setTimeout(() => {
+					toaster.style.display = 'none';
+				}, 300);
+			}, 3000);
+		}
+
+		// Form validation function
+		function validateForm() {
+			const nameField = document.getElementById('wpforms-1435-field_0');
+			const emailField = document.getElementById('wpforms-1435-field_1');
+			const phoneField = document.getElementById('wpforms-1435-field_3');
+			
+			// Check if all required fields are filled
+			const isNameValid = nameField && nameField.value.trim() !== '';
+			const isEmailValid = emailField && emailField.value.trim() !== '';
+			const isPhoneValid = phoneField && phoneField.value.trim() !== '';
+			
+			return isNameValid && isEmailValid && isPhoneValid;
+		}
+
+		// Add event listener to the submit button
+		document.addEventListener('DOMContentLoaded', function() {
+			const submitButton = document.getElementById('wpforms-submit-1435');
+			if (submitButton) {
+				submitButton.addEventListener('click', function(e) {
+					// Only show toaster if all required fields are filled
+					if (validateForm()) {
+						showToaster();
+					}
+					// If validation fails, let the form's default validation handle it
+				});
+			}
+		});
+	</script>
 
 </body>
 

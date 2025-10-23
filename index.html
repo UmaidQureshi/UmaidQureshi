@@ -3846,7 +3846,7 @@
 		href="https://skystreamnow.com/wp-content/plugins/ultimate-addons-for-gutenberg/assets/css/slick.min.css?ver=2.12.8"
 		media="all">
 	<link rel="stylesheet" id="uag-style-1399-css"
-		href="https://skystreamnow.com/wp-content/uploads/uag-plugin/assets/1000/uag-css-1399.css?ver=1760440993"
+		href="./uag.css"
 		media="all">
 	<link rel="stylesheet" id="wpforms-modern-full-css"
 		href="https://skystreamnow.com/wp-content/plugins/wpforms-lite/assets/css/frontend/modern/wpforms-full.min.css?ver=1.8.7.2"
@@ -4026,12 +4026,43 @@
 		.go4109123758>* {
 			pointer-events: auto;
 		}
+
+		/* Toaster Notification Styles */
+		.toaster {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: #4CAF50;
+			color: white;
+			padding: 15px 20px;
+			border-radius: 5px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			z-index: 10000;
+			transform: translateX(400px);
+			transition: transform 0.3s ease-in-out;
+			font-family: Arial, sans-serif;
+			font-size: 14px;
+			max-width: 300px;
+		}
+
+		.toaster.show {
+			transform: translateX(0);
+		}
+
+		.toaster.success {
+			background: #4CAF50;
+		}
 	</style>
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope"
 	class="home page-template-default page page-id-1399 ast-desktop ast-plain-container ast-no-sidebar astra-4.6.12 ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-normal-title-enabled"
 	style="">
+
+	<!-- Toaster Notification -->
+	<div id="toaster" class="toaster success" style="display: none;">
+		Your request has been send successfully
+	</div>
 
 	<a class="skip-link screen-reader-text" href="#content" role="link" title="Skip to content">
 		Skip to content</a>
@@ -5050,6 +5081,51 @@
 		id="jam-coms-749c6d6d-cad5-4e90-9bd4-5174cc64fd7f"
 		src="chrome-extension://iohjgamcilhbgmhbnllfolmkmmekfmci/icom.html?t=Nzk2Njg0MzU5NTUyNTIzMzpbWyJuYW1lIiwiaWZyYW1lLWNvbSJdLFsidGFiSWQiLDE2Nzk4NzgxNzVdXQ"
 		style="display: none; width: 0px; height: 0px;"></iframe>
+
+	<script>
+		// Toaster notification functionality
+		function showToaster() {
+			const toaster = document.getElementById('toaster');
+			toaster.style.display = 'block';
+			toaster.classList.add('show');
+			
+			// Hide toaster after 3 seconds
+			setTimeout(() => {
+				toaster.classList.remove('show');
+				setTimeout(() => {
+					toaster.style.display = 'none';
+				}, 300);
+			}, 3000);
+		}
+
+		// Form validation function
+		function validateForm() {
+			const nameField = document.getElementById('wpforms-1435-field_0');
+			const emailField = document.getElementById('wpforms-1435-field_1');
+			const phoneField = document.getElementById('wpforms-1435-field_3');
+			
+			// Check if all required fields are filled
+			const isNameValid = nameField && nameField.value.trim() !== '';
+			const isEmailValid = emailField && emailField.value.trim() !== '';
+			const isPhoneValid = phoneField && phoneField.value.trim() !== '';
+			
+			return isNameValid && isEmailValid && isPhoneValid;
+		}
+
+		// Add event listener to the submit button
+		document.addEventListener('DOMContentLoaded', function() {
+			const submitButton = document.getElementById('wpforms-submit-1435');
+			if (submitButton) {
+				submitButton.addEventListener('click', function(e) {
+					// Only show toaster if all required fields are filled
+					if (validateForm()) {
+						showToaster();
+					}
+					// If validation fails, let the form's default validation handle it
+				});
+			}
+		});
+	</script>
 </body>
 
 </html>
